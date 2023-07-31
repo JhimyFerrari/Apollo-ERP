@@ -35,7 +35,7 @@ class Model
                 break;
 
             case 'cliente':
-                $sql = "SELECT cod,razaosocial_nomecompleto,nomefantasia_nomecomercial,email,cep,cidade,cnpj_cpf,nrfone,nrlocal,endereco,ie,estatus FROM cliente_fornecedor WHERE ifornecedor = 0";
+                $sql = "SELECT cod,razaosocial_nomecompleto,nomefantasia_nomecomercial,email,cep,uf,cidade,cnpj_cpf,nrfone,nrlocal,endereco,ie,estatus FROM cliente_fornecedor WHERE ifornecedor = 0";
                 $cabeçalho = '
                 <thead>
                 <tr>
@@ -44,6 +44,7 @@ class Model
                     <th scope="col">Nome Fantasia <br> Nome Comercial</th>
                     <th scope="col">Email</th>
                     <th scope="col">CEP</th>
+                    <th scope="col">UF</th>
                     <th scope="col">Cidade</th>
                     <th scope="col">CNPJ <br> CPF</th>
                     <th scope="col">Telefone</th>
@@ -59,7 +60,7 @@ class Model
                 break;
 
             case 'fornecedor':
-                $sql = "SELECT cod,razaosocial_nomecompleto,nomefantasia_nomecomercial,email,cep,cidade,cnpj_cpf,nrfone,nrlocal,endereco,ie,estatus FROM cliente_fornecedor WHERE ifornecedor = 1";
+                $sql = "SELECT cod,razaosocial_nomecompleto,nomefantasia_nomecomercial,email,cep,uf,cidade,cnpj_cpf,nrfone,nrlocal,endereco,ie,estatus FROM cliente_fornecedor WHERE ifornecedor = 1";
                 $cabeçalho = '
                 <thead>
                 <tr>
@@ -68,6 +69,7 @@ class Model
                     <th scope="col">Nome Fantasia <br> Nome Comercial</th>
                     <th scope="col">Email</th>
                     <th scope="col">CEP</th>
+                    <th scope="col">UF</th>
                     <th scope="col">Cidade</th>
                     <th scope="col">CNPJ <br> CPF</th>
                     <th scope="col">Telefone</th>
@@ -81,7 +83,7 @@ class Model
             <tbody>';
                 break;
             case 'vendedor':
-                $sql = "SELECT cod,nome,email,rg,cpf,dtnascimento,nrfone,nrlocal,endereco,cep,cidade,dtcontratacao,dtdemissao,estatus FROM vendedor";
+                $sql = "SELECT cod,nome,email,rg,cpf,dtnascimento,nrfone,nrlocal,endereco,cep,uf,cidade,dtcontratacao,dtdemissao,estatus FROM vendedor";
                 $cabeçalho = '
                 <thead>
                 <tr>
@@ -95,6 +97,7 @@ class Model
                     <th scope="col">N°</th>
                     <th scope="col">Endereço</th>
                     <th scope="col">CEP</th>
+                    <th scope="col">UF</th>
                     <th scope="col">Cidade</th>
                     <th scope="col">Data Contração</th>
                     <th scope="col">Data Demissão</th>
