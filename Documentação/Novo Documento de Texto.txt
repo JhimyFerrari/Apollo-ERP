@@ -1,0 +1,3 @@
+Sugestão Borth: Colocar Cadastro de cliente e fornecedor Junto
+
+No consultar fazer um para cada, sendo um listar direto para edição
