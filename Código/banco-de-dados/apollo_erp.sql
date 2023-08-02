@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Jun-2023 às 14:29
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.6
+-- Tempo de geração: 02/08/2023 às 14:08
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `apollo_erp`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categoria`
+-- Estrutura para tabela `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -34,10 +34,10 @@ CREATE TABLE `categoria` (
   `nome` varchar(45) NOT NULL,
   `estatus` varchar(15) DEFAULT 'ativo',
   `descric` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `categoria`
+-- Despejando dados para a tabela `categoria`
 --
 
 INSERT INTO `categoria` (`cod`, `nome`, `estatus`, `descric`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `categoria` (`cod`, `nome`, `estatus`, `descric`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cliente_fornecedor`
+-- Estrutura para tabela `cliente_fornecedor`
 --
 
 CREATE TABLE `cliente_fornecedor` (
@@ -57,6 +57,7 @@ CREATE TABLE `cliente_fornecedor` (
   `nomefantasia_nomecomercial` varchar(45) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
   `cep` char(9) NOT NULL,
+  `uf` char(2) NOT NULL,
   `cidade` varchar(50) NOT NULL,
   `cnpj_cpf` varchar(18) NOT NULL,
   `nrfone` varchar(15) NOT NULL,
@@ -65,31 +66,31 @@ CREATE TABLE `cliente_fornecedor` (
   `ie` char(15) DEFAULT NULL,
   `ipfisica` tinyint(1) DEFAULT 0,
   `ifornecedor` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `cliente_fornecedor`
+-- Despejando dados para a tabela `cliente_fornecedor`
 --
 
-INSERT INTO `cliente_fornecedor` (`cod`, `estatus`, `idlinhavenda`, `razaosocial_nomecompleto`, `nomefantasia_nomecomercial`, `email`, `cep`, `cidade`, `cnpj_cpf`, `nrfone`, `nrlocal`, `endereco`, `ie`, `ipfisica`, `ifornecedor`) VALUES
-(19, 'ativo', 7, 'Jhimy Kenedy Souza Ferrari', 'Ferrari Pan', 'Sem Email', '87538000', 'Perobal', '08570954980', '55 44 98454-', '0444', 'Jardim Araucária - Rua Miguel Rúbio', '321321qrq', 1, 0),
-(21, 'ativo', 6, 'Instituto Federal do Paraná Campus Umuarama', 'IFPR', 'If@gmail.com', '87538.000', 'Umuarama', '10.652.179/0001-15', '(44) 49898-4968', '4073', 'Jardim Topasio - Rodovia Italo Orcelli', '111.111.111.111', 0, 0),
-(22, 'ativo', NULL, 'Gabriel Costa da Silva', 'Mr Biel', 'boidamadrugada@gmail.com', '87538.000', 'Umuarama', '113.545.119-21', '(44) 98454-5540', '1114', 'Arapongas - Avenida Paraná', '111.111.111.111', 1, 1);
+INSERT INTO `cliente_fornecedor` (`cod`, `estatus`, `idlinhavenda`, `razaosocial_nomecompleto`, `nomefantasia_nomecomercial`, `email`, `cep`, `uf`, `cidade`, `cnpj_cpf`, `nrfone`, `nrlocal`, `endereco`, `ie`, `ipfisica`, `ifornecedor`) VALUES
+(19, 'ativo', 7, 'Jhimy Kenedy Souza Ferrari', 'Ferrari Pan', 'Sem Email', '87538000', '', 'Perobal', '08570954980', '55 44 98454-', '0444', 'Jardim Araucária - Rua Miguel Rúbio', '321321qrq', 1, 0),
+(21, 'ativo', 6, 'Instituto Federal do Paraná Campus Umuarama', 'IFPR', 'If@gmail.com', '87538.000', '', 'Umuarama', '10.652.179/0001-15', '(44) 49898-4968', '4073', 'Jardim Topasio - Rodovia Italo Orcelli', '111.111.111.111', 0, 0),
+(22, 'ativo', NULL, 'Gabriel Costa da Silva', 'Mr Biel', 'boidamadrugada@gmail.com', '87538.000', '', 'Umuarama', '113.545.119-21', '(44) 98454-5540', '1114', 'Arapongas - Avenida Paraná', '111.111.111.111', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `condicao_recebimento`
+-- Estrutura para tabela `condicao_recebimento`
 --
 
 CREATE TABLE `condicao_recebimento` (
   `cod` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `estatus` varchar(15) DEFAULT 'ativo'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `condicao_recebimento`
+-- Despejando dados para a tabela `condicao_recebimento`
 --
 
 INSERT INTO `condicao_recebimento` (`cod`, `nome`, `estatus`) VALUES
@@ -99,7 +100,7 @@ INSERT INTO `condicao_recebimento` (`cod`, `nome`, `estatus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `itens_venda_compra`
+-- Estrutura para tabela `itens_venda_compra`
 --
 
 CREATE TABLE `itens_venda_compra` (
@@ -110,12 +111,12 @@ CREATE TABLE `itens_venda_compra` (
   `pcdesconto` decimal(5,2) DEFAULT NULL,
   `vlunitario` decimal(10,2) NOT NULL,
   `vltotal` decimal(5,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `linha_de_venda`
+-- Estrutura para tabela `linha_de_venda`
 --
 
 CREATE TABLE `linha_de_venda` (
@@ -123,10 +124,10 @@ CREATE TABLE `linha_de_venda` (
   `nome` varchar(50) NOT NULL,
   `estatus` varchar(15) NOT NULL DEFAULT 'ativo',
   `descric` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `linha_de_venda`
+-- Despejando dados para a tabela `linha_de_venda`
 --
 
 INSERT INTO `linha_de_venda` (`cod`, `nome`, `estatus`, `descric`) VALUES
@@ -141,7 +142,7 @@ INSERT INTO `linha_de_venda` (`cod`, `nome`, `estatus`, `descric`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `marca`
+-- Estrutura para tabela `marca`
 --
 
 CREATE TABLE `marca` (
@@ -149,10 +150,10 @@ CREATE TABLE `marca` (
   `nome` varchar(45) NOT NULL,
   `estatus` varchar(15) DEFAULT 'ativo',
   `descric` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `marca`
+-- Despejando dados para a tabela `marca`
 --
 
 INSERT INTO `marca` (`cod`, `nome`, `estatus`, `descric`) VALUES
@@ -163,7 +164,7 @@ INSERT INTO `marca` (`cod`, `nome`, `estatus`, `descric`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `mov_venda_compra`
+-- Estrutura para tabela `mov_venda_compra`
 --
 
 CREATE TABLE `mov_venda_compra` (
@@ -177,12 +178,12 @@ CREATE TABLE `mov_venda_compra` (
   `idclientefornecedor` int(11) NOT NULL,
   `compra` tinyint(1) DEFAULT 0,
   `descric` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produto`
+-- Estrutura para tabela `produto`
 --
 
 CREATE TABLE `produto` (
@@ -204,12 +205,12 @@ CREATE TABLE `produto` (
   `idmarca` int(11) NOT NULL,
   `idsetor` int(11) NOT NULL,
   `descric` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `setor`
+-- Estrutura para tabela `setor`
 --
 
 CREATE TABLE `setor` (
@@ -217,10 +218,10 @@ CREATE TABLE `setor` (
   `nome` varchar(45) NOT NULL,
   `estatus` varchar(15) DEFAULT 'ativo',
   `descric` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `setor`
+-- Despejando dados para a tabela `setor`
 --
 
 INSERT INTO `setor` (`cod`, `nome`, `estatus`, `descric`) VALUES
@@ -233,7 +234,7 @@ INSERT INTO `setor` (`cod`, `nome`, `estatus`, `descric`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario`
+-- Estrutura para tabela `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -243,10 +244,10 @@ CREATE TABLE `usuario` (
   `senha` varchar(255) NOT NULL,
   `estatus` varchar(15) DEFAULT 'ativo',
   `iadmin` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario`
+-- Despejando dados para a tabela `usuario`
 --
 
 INSERT INTO `usuario` (`cod`, `nome`, `email`, `senha`, `estatus`, `iadmin`) VALUES
@@ -257,7 +258,7 @@ INSERT INTO `usuario` (`cod`, `nome`, `email`, `senha`, `estatus`, `iadmin`) VAL
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `vendedor`
+-- Estrutura para tabela `vendedor`
 --
 
 CREATE TABLE `vendedor` (
@@ -271,64 +272,65 @@ CREATE TABLE `vendedor` (
   `nrlocal` char(4) NOT NULL,
   `endereco` varchar(45) NOT NULL,
   `cep` char(9) NOT NULL,
+  `uf` char(2) NOT NULL,
   `cidade` varchar(45) NOT NULL,
   `dtcontratacao` date NOT NULL DEFAULT current_timestamp(),
   `dtdemissao` date DEFAULT NULL,
   `dtnascimento` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `vendedor`
+-- Despejando dados para a tabela `vendedor`
 --
 
-INSERT INTO `vendedor` (`cod`, `estatus`, `nome`, `email`, `rg`, `cpf`, `nrfone`, `nrlocal`, `endereco`, `cep`, `cidade`, `dtcontratacao`, `dtdemissao`, `dtnascimento`) VALUES
-(2, 'ativo', 'Jhimy', 'souzaferrarik@gmai.com', 'aaaaaaa', 'wdwdasrasra', '444444444444', '0949', 'Centro - Miguel Rubio', '875380000', 'Perobal', '2023-05-11', NULL, '2005-05-06'),
-(3, 'ativo', 'Jhimy Kenedy Souza Ferrari ', 'Sem Email', '14.512.045-4', '085.709.549-80', '(44) 98454-5540', '0949', 'Jardim Imperial - Rua Miguel Rúbio', '87538.000', 'Perobal', '2023-06-28', NULL, '2005-05-06');
+INSERT INTO `vendedor` (`cod`, `estatus`, `nome`, `email`, `rg`, `cpf`, `nrfone`, `nrlocal`, `endereco`, `cep`, `uf`, `cidade`, `dtcontratacao`, `dtdemissao`, `dtnascimento`) VALUES
+(2, 'ativo', 'Jhimy', 'souzaferrarik@gmai.com', 'aaaaaaa', 'wdwdasrasra', '444444444444', '0949', 'Centro - Miguel Rubio', '875380000', '', 'Perobal', '2023-05-11', NULL, '2005-05-06'),
+(3, 'ativo', 'Jhimy Kenedy Souza Ferrari ', 'Sem Email', '14.512.045-4', '085.709.549-80', '(44) 98454-5540', '0949', 'Jardim Imperial - Rua Miguel Rúbio', '87538.000', '', 'Perobal', '2023-06-28', NULL, '2005-05-06');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `categoria`
+-- Índices de tabela `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`cod`);
 
 --
--- Índices para tabela `cliente_fornecedor`
+-- Índices de tabela `cliente_fornecedor`
 --
 ALTER TABLE `cliente_fornecedor`
   ADD PRIMARY KEY (`cod`),
   ADD KEY `idlinhavenda` (`idlinhavenda`);
 
 --
--- Índices para tabela `condicao_recebimento`
+-- Índices de tabela `condicao_recebimento`
 --
 ALTER TABLE `condicao_recebimento`
   ADD PRIMARY KEY (`cod`);
 
 --
--- Índices para tabela `itens_venda_compra`
+-- Índices de tabela `itens_venda_compra`
 --
 ALTER TABLE `itens_venda_compra`
   ADD PRIMARY KEY (`idproduto`,`idvendacompra`),
   ADD KEY `idvendacompra` (`idvendacompra`);
 
 --
--- Índices para tabela `linha_de_venda`
+-- Índices de tabela `linha_de_venda`
 --
 ALTER TABLE `linha_de_venda`
   ADD PRIMARY KEY (`cod`);
 
 --
--- Índices para tabela `marca`
+-- Índices de tabela `marca`
 --
 ALTER TABLE `marca`
   ADD PRIMARY KEY (`cod`);
 
 --
--- Índices para tabela `mov_venda_compra`
+-- Índices de tabela `mov_venda_compra`
 --
 ALTER TABLE `mov_venda_compra`
   ADD PRIMARY KEY (`cod`),
@@ -337,7 +339,7 @@ ALTER TABLE `mov_venda_compra`
   ADD KEY `idclientefornecedor` (`idclientefornecedor`);
 
 --
--- Índices para tabela `produto`
+-- Índices de tabela `produto`
 --
 ALTER TABLE `produto`
   ADD PRIMARY KEY (`cod`),
@@ -346,25 +348,25 @@ ALTER TABLE `produto`
   ADD KEY `idsetor` (`idsetor`);
 
 --
--- Índices para tabela `setor`
+-- Índices de tabela `setor`
 --
 ALTER TABLE `setor`
   ADD PRIMARY KEY (`cod`);
 
 --
--- Índices para tabela `usuario`
+-- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`cod`);
 
 --
--- Índices para tabela `vendedor`
+-- Índices de tabela `vendedor`
 --
 ALTER TABLE `vendedor`
   ADD PRIMARY KEY (`cod`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -428,24 +430,24 @@ ALTER TABLE `vendedor`
   MODIFY `cod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `cliente_fornecedor`
+-- Restrições para tabelas `cliente_fornecedor`
 --
 ALTER TABLE `cliente_fornecedor`
   ADD CONSTRAINT `cliente_fornecedor_ibfk_1` FOREIGN KEY (`idlinhavenda`) REFERENCES `linha_de_venda` (`cod`);
 
 --
--- Limitadores para a tabela `itens_venda_compra`
+-- Restrições para tabelas `itens_venda_compra`
 --
 ALTER TABLE `itens_venda_compra`
   ADD CONSTRAINT `itens_venda_compra_ibfk_1` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`cod`),
   ADD CONSTRAINT `itens_venda_compra_ibfk_2` FOREIGN KEY (`idvendacompra`) REFERENCES `mov_venda_compra` (`cod`);
 
 --
--- Limitadores para a tabela `mov_venda_compra`
+-- Restrições para tabelas `mov_venda_compra`
 --
 ALTER TABLE `mov_venda_compra`
   ADD CONSTRAINT `mov_venda_compra_ibfk_1` FOREIGN KEY (`idcondicao`) REFERENCES `condicao_recebimento` (`cod`),
@@ -453,7 +455,7 @@ ALTER TABLE `mov_venda_compra`
   ADD CONSTRAINT `mov_venda_compra_ibfk_3` FOREIGN KEY (`idclientefornecedor`) REFERENCES `cliente_fornecedor` (`cod`);
 
 --
--- Limitadores para a tabela `produto`
+-- Restrições para tabelas `produto`
 --
 ALTER TABLE `produto`
   ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`idcategoria`) REFERENCES `categoria` (`cod`),
